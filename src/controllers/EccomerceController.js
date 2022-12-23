@@ -19,6 +19,7 @@ const sendResponse = (status, body, headers) => ({
 
 const EccomerceController = {
   buyProduct: async (req, res) => {
+    console.log("buyProduct");
     try {
       const { uid, productId, amount } = req.body;
       const product = await getProductById(productId);
@@ -37,6 +38,7 @@ const EccomerceController = {
     return res.json(sendResponse(200, { message: OK_SALE }, req.headers));
   },
   buyProducts: async (req, res) => {
+    console.log("buyProducts");
     try {
       const { uid, products } = req.body;
       let promises = [];
@@ -98,7 +100,7 @@ const EccomerceController = {
           const saleIVA = sale.total * 0.19;
           totalSales += sale.total;
           totalIVA += saleIVA;
-          const product = await getProductById(sale.productId);
+          const product = await getProductById(sale.product_id);
           let productName = product ? product.name : "Producto no existente";
           report.sales.push({
             name: productName,

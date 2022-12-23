@@ -1,5 +1,5 @@
 const INSERT_SALE =
-  "INSERT INTO `tbl_shopping` (`uid`, `productId`, `amount`, `total`, `create_at`) VALUES (?, ?, ?, ?, current_timestamp());";
+  "INSERT INTO `tbl_shopping` (`uid`, `product_id`, `amount`, `total`, `create_at`) VALUES (?, ?, ?, ?, current_timestamp());";
 const UPDATE_STOCK =
   "UPDATE `tbl_products` SET `stock` = ? WHERE `tbl_products`.`id` = ?;";
 const GET_SALES = "SELECT * FROM `tbl_shopping`;";
@@ -29,6 +29,7 @@ const SaleService = {
     try {
       const con = await getConnection();
       const [sales] = await con.query(GET_SALES);
+      console.log(sales);
       return sales;
     } catch (error) {
       throw error;
